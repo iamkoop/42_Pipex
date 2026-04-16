@@ -6,7 +6,7 @@
 /*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 17:14:44 by nilsdruon         #+#    #+#             */
-/*   Updated: 2026/04/15 22:44:14 by nilsdruon        ###   ########.fr       */
+/*   Updated: 2026/04/16 11:53:26 by nilsdruon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char	**argv,  char **envp)
 	if(pip.child1 == 0)
 	{
 		close(pip.fds[0]);
-		dup2(input, pip.fds[1]);
+		dup2(pip.fds[1], STDOUT_FILENO);
 		execve("/bin/ls", &argv[1], envp);
 		close(pip.fds[1]);
 		return (0);
@@ -39,7 +39,7 @@ int	main(int argc, char	**argv,  char **envp)
 	if(pip.child2 == 0)
 	{
 		close(pip.fds[1]);
-		dup2(pip.fds[0], output);
+		dup2(pip.fds[0], STDIN_FILENO);
 		execve("/bin/ls", &argv[1], envp);
 		close(pip.fds[0]);
 		return (0);
