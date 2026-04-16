@@ -3,6 +3,7 @@
 
 # include <unistd.h>
 # include <stdio.h>
+# include "libft_lib/libft.h"
 
 typedef struct s_pipex
 {
@@ -11,4 +12,11 @@ typedef struct s_pipex
     int child1;
     int child2;
 }   t_pipex;
+
+//MAIN
+int	main(int argc, char	**argv,  char **envp);
+
+//ACCESS
+char *get_path(char	*cmd, char **envp);
+
 #endif

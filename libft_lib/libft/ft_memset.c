@@ -1,27 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/14 17:14:44 by nilsdruon         #+#    #+#             */
-/*   Updated: 2026/04/17 00:53:47 by nildruon         ###   ########.fr       */
+/*   Created: 2025/09/30 14:22:03 by nildruon          #+#    #+#             */
+/*   Updated: 2025/10/16 21:27:47 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
+#include "libft.h"
 
-
-
-
-int	main(int argc, char	**argv,  char **envp)
+void	*ft_memset(void *s, int c, size_t n)
 {
-	if(argc != 2)
-		return(perror("Wrong amount of args"), 1);
-	printf("%s", get_path(argv[1], envp));
-	return  (0);
+	size_t			i;
+	unsigned char	*ptr;
+
+	i = 0;
+	ptr = (unsigned char *)s;
+	while (i < n)
+	{
+		ptr[i] = c;
+		i++;
+	}
+	return (ptr);
 }
+
+/*
+#include <stdio.h>
+int main(void)
+{
+	unsigned char ptr[] = "Test"; 
+	unsigned char *ptr2; 
+
+	printf("%s\n", ptr);
+	ptr2 = (unsigned char *) ft_memset(ptr,'P', 3);
+	printf("%s\n", ptr2);
+}*/

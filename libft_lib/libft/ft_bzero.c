@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nilsdruon <nilsdruon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/14 17:14:44 by nilsdruon         #+#    #+#             */
-/*   Updated: 2026/04/17 00:53:47 by nildruon         ###   ########.fr       */
+/*   Created: 2025/10/06 15:25:03 by nildruon          #+#    #+#             */
+/*   Updated: 2026/02/01 19:57:20 by nilsdruon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
+#include "libft.h"
 
-
-
-
-int	main(int argc, char	**argv,  char **envp)
+void	ft_bzero(void *s, size_t n)
 {
-	if(argc != 2)
-		return(perror("Wrong amount of args"), 1);
-	printf("%s", get_path(argv[1], envp));
-	return  (0);
+	ft_memset(s, '\0', n);
 }
+
+/*
+#include <unistd.h>
+int main(void)
+{
+	char str[] = "JUUUUUUUUUUUUUUUUUUUUUUUMP";
+	write(1,&str,10);
+	ft_bzero(str, 5);
+	write(1,&str,10);
+}*/

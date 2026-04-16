@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   pointer_converter.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/14 17:14:44 by nilsdruon         #+#    #+#             */
-/*   Updated: 2026/04/17 00:53:47 by nildruon         ###   ########.fr       */
+/*   Created: 2025/10/27 21:01:06 by nildruon          #+#    #+#             */
+/*   Updated: 2026/02/04 15:06:32 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
+#include "libft.h"
 
-
-
-
-int	main(int argc, char	**argv,  char **envp)
+int	print_pointer(void *ptr)
 {
-	if(argc != 2)
-		return(perror("Wrong amount of args"), 1);
-	printf("%s", get_path(argv[1], envp));
-	return  (0);
+	uintptr_t	nb;
+	int			len;
+
+	if (!ptr)
+	{
+		ft_putstr_fd("(nil)", 1);
+		return (5);
+	}
+	nb = (uintptr_t)ptr;
+	ft_putstr_fd("0x", 1);
+	len = 2 + print_hex('x', nb, 0);
+	return (len);
 }

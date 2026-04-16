@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/14 17:14:44 by nilsdruon         #+#    #+#             */
-/*   Updated: 2026/04/17 00:53:47 by nildruon         ###   ########.fr       */
+/*   Created: 2025/09/30 11:55:32 by nildruon          #+#    #+#             */
+/*   Updated: 2025/10/16 21:20:16 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
-
-
-
-
-int	main(int argc, char	**argv,  char **envp)
+int	ft_isascii(int c)
 {
-	if(argc != 2)
-		return(perror("Wrong amount of args"), 1);
-	printf("%s", get_path(argv[1], envp));
-	return  (0);
+	if (c >= 0 && c <= 127)
+		return (1);
+	return (0);
 }
+
+/*
+#include <stdio.h>
+int	main(void)
+{
+	printf("%d\n", ft_isascii(3));
+	printf("%d\n", ft_isascii('a'));
+	printf("%d\n", ft_isascii(130));
+}*/

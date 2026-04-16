@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/14 17:14:44 by nilsdruon         #+#    #+#             */
-/*   Updated: 2026/04/17 00:53:47 by nildruon         ###   ########.fr       */
+/*   Created: 2025/10/08 18:12:27 by nildruon          #+#    #+#             */
+/*   Updated: 2026/04/10 19:27:15 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
+#include "libft.h"
 
-
-
-
-int	main(int argc, char	**argv,  char **envp)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	if(argc != 2)
-		return(perror("Wrong amount of args"), 1);
-	printf("%s", get_path(argv[1], envp));
-	return  (0);
+	void	*ptr;
+
+	if (nmemb == 0 || size == 0)
+	{
+		ptr = malloc(1);
+		if (!ptr)
+			return (NULL);
+		ft_bzero(ptr, 1);
+		return (ptr);
+	}
+	if (SIZE_MAX / size <= nmemb)
+		return (NULL);
+	ptr = malloc(nmemb * size);
+	if (!ptr)
+		return (NULL);
+	ft_bzero(ptr, nmemb * size);
+	return (ptr);
 }

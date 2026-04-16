@@ -1,27 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/14 17:14:44 by nilsdruon         #+#    #+#             */
-/*   Updated: 2026/04/17 00:53:47 by nildruon         ###   ########.fr       */
+/*   Created: 2025/10/08 17:15:47 by nildruon          #+#    #+#             */
+/*   Updated: 2025/10/16 21:39:18 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
+#include "libft.h"
 
-
-
-
-int	main(int argc, char	**argv,  char **envp)
+char	*ft_strdup(const char *s)
 {
-	if(argc != 2)
-		return(perror("Wrong amount of args"), 1);
-	printf("%s", get_path(argv[1], envp));
-	return  (0);
+	size_t	len;
+	char	*cpy;
+	size_t	i;
+
+	len = ft_strlen(s);
+	cpy = (char *)malloc(len + 1);
+	if (!cpy)
+		return (NULL);
+	i = 0;
+	while (i <= len)
+	{
+		cpy[i] = s[i];
+		i++;
+	}
+	return (cpy);
 }
+
+/*
+#include <stdio.h>
+int main(void)
+{
+	const char *s = "Kiwara";
+	printf("%s\n", s);
+	printf("%s\n", ft_strdup(s));
+}*/

@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/14 17:14:44 by nilsdruon         #+#    #+#             */
-/*   Updated: 2026/04/17 00:53:47 by nildruon         ###   ########.fr       */
+/*   Created: 2025/09/30 13:27:07 by nildruon          #+#    #+#             */
+/*   Updated: 2025/10/16 21:21:00 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
-
-
-
-
-int	main(int argc, char	**argv,  char **envp)
+int	ft_isprint(int c)
 {
-	if(argc != 2)
-		return(perror("Wrong amount of args"), 1);
-	printf("%s", get_path(argv[1], envp));
-	return  (0);
+	if (c < 32 || c > 126)
+		return (0);
+	return (1);
 }
+
+/*
+#include <stdio.h>
+int	main(void)
+{
+	printf("%d\n", ft_isprint(3));
+	printf("%d\n", ft_isprint(' '));
+	printf("%d\n", ft_isprint('a'));
+	printf("%d\n", ft_isprint(120));
+}*/

@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/14 17:14:44 by nilsdruon         #+#    #+#             */
-/*   Updated: 2026/04/17 00:53:47 by nildruon         ###   ########.fr       */
+/*   Created: 2025/09/30 14:56:25 by nildruon          #+#    #+#             */
+/*   Updated: 2025/10/18 14:55:08 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
-
-
-
-
-int	main(int argc, char	**argv,  char **envp)
+int	ft_toupper(int c)
 {
-	if(argc != 2)
-		return(perror("Wrong amount of args"), 1);
-	printf("%s", get_path(argv[1], envp));
-	return  (0);
+	if (c >= 'a' && c <= 'z')
+		return (c - 32);
+	return (c);
 }
+
+/*
+#include <stdio.h>
+int	main(void)
+{
+	printf("%c\n", ft_toupper('c'));
+	printf("%c\n", ft_toupper('N'));
+	printf("%c\n", ft_toupper('a'));
+	printf("%c\n", ft_toupper('1'));
+}*/

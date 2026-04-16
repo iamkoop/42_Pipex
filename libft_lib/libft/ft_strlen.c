@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/14 17:14:44 by nilsdruon         #+#    #+#             */
-/*   Updated: 2026/04/17 00:53:47 by nildruon         ###   ########.fr       */
+/*   Created: 2025/09/30 13:42:34 by nildruon          #+#    #+#             */
+/*   Updated: 2026/03/16 12:33:05 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
 #include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
 
-
-
-
-int	main(int argc, char	**argv,  char **envp)
+size_t	ft_strlen(const char *s)
 {
-	if(argc != 2)
-		return(perror("Wrong amount of args"), 1);
-	printf("%s", get_path(argv[1], envp));
-	return  (0);
+	size_t	size;
+
+	size = 0;
+	if (!s)
+		return (0);
+	while (s[size])
+	{
+		size++;
+	}
+	return (size);
 }
+
+/*int	main(void)
+{
+	printf("%zu\n", ft_strlen("WEEE"));
+	printf("%zu\n", ft_strlen(" "));
+	printf("%zu\n", ft_strlen("a"));
+	printf("%zu\n", ft_strlen("\0"));
+}*/

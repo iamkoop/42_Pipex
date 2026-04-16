@@ -1,27 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/14 17:14:44 by nilsdruon         #+#    #+#             */
-/*   Updated: 2026/04/17 00:53:47 by nildruon         ###   ########.fr       */
+/*   Created: 2025/10/14 11:20:49 by nildruon          #+#    #+#             */
+/*   Updated: 2025/10/16 21:30:21 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
-
-
-
-
-int	main(int argc, char	**argv,  char **envp)
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	if(argc != 2)
-		return(perror("Wrong amount of args"), 1);
-	printf("%s", get_path(argv[1], envp));
-	return  (0);
+	int		i;
+
+	i = 0;
+	if (!s || !f)
+		return ;
+	while (s[i])
+	{
+		f(i, &s[i]);
+		i++;
+	}
 }
+/*
+#include <stdio.h>
+
+void	toupperRevamped(unsigned int i, char *s)
+{
+	if (s[i] >= 'a' && s[i] <= 'z')
+		s[i] -= 32;
+}
+
+int main(void)
+{
+	char s1[] = "cats and dogs";
+	printf("%s\n", s1);
+	ft_striteri(s1, toupperRevamped);
+	printf("%s\n", s1);
+}*/
