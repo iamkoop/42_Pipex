@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 17:59:46 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/19 18:31:47 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/20 01:05:32 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,21 +103,21 @@ static char	*check_if_its_a_path(char *cmd, int	*exit_status)
 	return (NULL);
 }
 
-char	*get_path(char	*cmd, char **envp, int	*exit_status)
+char	*get_path(t_pipex *pip, char *cmd)
 {
 	int		i;
 	char	*path;
 
-	if (!envp || !*envp)
+	if (!pip->envp || !*pip->envp)
 		return (perror("Envp not found"), NULL);
 	i = 0;
-	if (check_if_its_a_path(cmd, exit_status))
+	if (check_if_its_a_path(cmd, &pip->exit_status))
 		return (cmd);
-	while (envp[i])
+	while (pip->envp[i])
 	{
-		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
+		if (ft_strncmp(pip->envp[i], "PATH=", 5) == 0)
 		{
-			path = find_exacutable(cmd, envp[i] + 5, exit_status);
+			path = find_exacutable(cmd, pip->envp[i] + 5, &pip->exit_status);
 			if (!path)
 				return (NULL);
 			return (path);
