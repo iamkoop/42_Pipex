@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/14 17:14:44 by nilsdruon         #+#    #+#             */
-/*   Updated: 2026/04/19 17:37:05 by nildruon         ###   ########.fr       */
+/*   Created: 2026/04/19 17:20:01 by nildruon          #+#    #+#             */
+/*   Updated: 2026/04/19 18:17:12 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
 
-
-
-
-int	main(int argc, char	**argv,  char **envp)
+void	free_the_split(char **data)
 {
-	char	*cmd;
-	int		exit_status;
-	
-	if(argc != 2)
-		return(perror("Wrong amount of args"), 1);
-	exit_status = 0;
-	cmd = get_path(argv[1], envp, &exit_status);
-	printf("%s", cmd);
-	free(cmd);
-	return  (0);
+	int	i;
+
+	i = 0;
+	if (!data)
+		return ;
+	while (data[i])
+	{
+		free(data[i]);
+		i++;
+	}
+	free(data);
 }

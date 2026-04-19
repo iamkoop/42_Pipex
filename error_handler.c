@@ -1,33 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/14 17:14:44 by nilsdruon         #+#    #+#             */
-/*   Updated: 2026/04/19 17:37:05 by nildruon         ###   ########.fr       */
+/*   Created: 2026/04/19 16:27:48 by nildruon          #+#    #+#             */
+/*   Updated: 2026/04/19 18:17:06 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
 
-
-
-
-int	main(int argc, char	**argv,  char **envp)
+char	*malloc_fail_handler(char	*error_msg, int	*exit_status)
 {
-	char	*cmd;
-	int		exit_status;
-	
-	if(argc != 2)
-		return(perror("Wrong amount of args"), 1);
-	exit_status = 0;
-	cmd = get_path(argv[1], envp, &exit_status);
-	printf("%s", cmd);
-	free(cmd);
-	return  (0);
+	ft_putstr_fd(error_msg, 2);
+	*exit_status = 1;
+	return (NULL);
 }

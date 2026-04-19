@@ -3,7 +3,7 @@ CFLAGS = -Werror -Wall -Wextra -g -Ilibft_lib
 
 FDFFLAGS = -L. -lmlx -lXext -lX11 -lm
 
-CFILES = access.c main.c
+CFILES = error_handler.c free.c access.c main.c
 
 OFILES = $(CFILES:.c=.o)
 
