@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 17:59:46 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/20 01:05:32 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/20 16:32:11 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,16 @@ static char	*check_access(char	*cmd, int *exit_status, int send_perror)
 		{
 			if (send_perror)
 				perror(cmd);
-			*exit_status = 126;
+			if(!exit_status)
+				*exit_status = 126;
 		}
 	}
 	else
 	{
 		if (send_perror)
 			perror(cmd);
-		*exit_status = 127;
+		if(!exit_status)
+			*exit_status = 127;
 	}
 	return (NULL);
 }
@@ -119,7 +121,11 @@ char	*get_path(t_pipex *pip, char *cmd)
 		{
 			path = find_exacutable(cmd, pip->envp[i] + 5, &pip->exit_status);
 			if (!path)
+			{
+				if(!pip->exit_status)
+					pip->exit_status = 127;
 				return (NULL);
+			}
 			return (path);
 		}
 		i++;
