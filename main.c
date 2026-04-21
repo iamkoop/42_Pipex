@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 17:14:44 by nilsdruon         #+#    #+#             */
-/*   Updated: 2026/04/20 16:35:22 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/21 12:14:22 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,11 @@
 int	main(int argc, char	**argv, char **envp)
 {
 	t_pipex	pip;
-	int		exit_status;
 
 	pip = (t_pipex){0};
 	if (argc != 5)
 		return (perror("Wrong amount of args"), 1);
 	pip.argv = argv;
 	pip.envp = envp;
-	pip.exit_status = 0;
 	return (parent(&pip));
 }

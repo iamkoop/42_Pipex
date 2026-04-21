@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 18:33:38 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/20 16:23:38 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/21 12:40:55 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*get_path(t_pipex *pip, char *cmd);
 void	free_the_split(char **data);
 
 //error handler
-char	*malloc_fail_handler(char	*error_msg, int	*exit_status);
+char	*malloc_fail_handler(char	*error_msg, int	*exit_status, int exite);
 void	child_processes_handler(t_pipex	*pip, char	*error_msg, int child);
 
 int		parent(t_pipex *pip);
