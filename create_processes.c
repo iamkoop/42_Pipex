@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 19:44:05 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/21 15:37:19 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/22 20:04:28 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static void	first_child(t_pipex *pip)
 	pip->dupe1 = dup2(pip->infile, STDIN_FILENO);
 	if (pip->dupe1 == -1)
 		child_processes_handler(pip, "first dup2 in child 1", 1);
-	close(pip->infile);
 	pip->dupe2 = dup2(pip->fds[1], STDOUT_FILENO);
 	if (pip->dupe2 == -1)
 		child_processes_handler(pip, "second dup2 in child 1", 1);
@@ -63,6 +62,7 @@ static void	first_child(t_pipex *pip)
 	pip->path = get_path(pip, pip->cmd_and_args[0]);
 	if (!pip->path)
 		child_processes_handler(pip, "", 1);
+	close(pip->infile);
 	execve(pip->path, pip->cmd_and_args, pip->envp);
 	free(pip->path);
 	perror("execve child 1");

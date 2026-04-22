@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 18:33:38 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/21 12:40:55 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/22 19:57:59 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 # include "libft_lib/libft.h"
+# include <errno.h>
 
 typedef struct s_pipex
 {

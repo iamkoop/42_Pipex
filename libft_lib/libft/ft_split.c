@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 11:57:31 by nildruon          #+#    #+#             */
-/*   Updated: 2026/03/20 12:05:20 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/21 20:45:44 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	**ft_split(char const *s, char c)
 	i = 0;
 	if (!s)
 		return (NULL);
-	splitted = (char **)malloc(sizeof(char *) * (cnt_words(s, c) + 1));
+	splitted = (char **)calloc(sizeof(char *), (cnt_words(s, c) + 1));
 	if (!splitted)
 		return (NULL);
 	j = 0;

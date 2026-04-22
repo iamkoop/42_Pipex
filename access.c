@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 17:59:46 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/21 15:27:30 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/22 20:02:41 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ static char	*find_exacutable(char *cmd, char *env, int	*exit_status)
 
 static char	*check_if_its_a_path(char *cmd, int	*exit_status)
 {
-	if (!cmd || *cmd == '\0')
+	if (!cmd)
 		return (NULL);
 	if (ft_strchr(cmd, '/'))
 	{
@@ -116,7 +116,7 @@ char	*get_path(t_pipex *pip, char *cmd)
 		return (perror("Envp not found"), NULL);
 	i = 0;
 	if (check_if_its_a_path(cmd, &pip->exit_status))
-		return (cmd);
+		return (ft_strdup(cmd));
 	while (pip->envp[i])
 	{
 		if (ft_strncmp(pip->envp[i], "PATH=", 5) == 0)
@@ -132,5 +132,6 @@ char	*get_path(t_pipex *pip, char *cmd)
 		}
 		i++;
 	}
-	return (NULL);
+	errno = ENOENT;
+	return (perror(cmd), NULL);
 }

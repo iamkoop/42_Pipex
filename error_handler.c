@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 16:27:48 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/21 15:34:39 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/21 20:45:29 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,15 @@ char	*malloc_fail_handler(char	*error_msg, int	*exit_status, int exite)
 
 static	void	child2(t_pipex	*pip, char	*error_msg)
 {
-	if (pip->dupe1 == -1)
+	if (pip->outfile == -1)
+		close(pip->fds[0]);
+	else if (pip->dupe1 == -1)
 		close(pip->fds[0]);
 	else if (pip->dupe2 == -1)
 		close(pip->outfile);
 	else if (!pip->cmd_and_args)
 	{
-		malloc_fail_handler("split failed", &pip->exit_status, 0);
+		malloc_fail_handler("split failed\n", &pip->exit_status, 0);
 		close(pip->outfile);
 		exit(pip->exit_status);
 	}
@@ -57,7 +59,7 @@ static	void	child1(t_pipex	*pip, char	*error_msg)
 		close(pip->fds[1]);
 	else if (!pip->cmd_and_args)
 	{
-		malloc_fail_handler("split failed", &pip->exit_status, 0);
+		malloc_fail_handler("split failed\n", &pip->exit_status, 0);
 		exit(pip->exit_status);
 	}
 	else if (!pip->path)
