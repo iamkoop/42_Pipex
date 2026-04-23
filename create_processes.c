@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 19:44:05 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/22 20:04:28 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/23 17:34:09 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	second_child(t_pipex *pip)
 	close(pip->fds[0]);
 	pip->outfile = open(pip->argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (pip->outfile == -1)
-		child_processes_handler(pip, "outfile", 2);
+		child_processes_handler(pip, pip->argv[4], 2);
 	pip->dupe2 = dup2(pip->outfile, STDOUT_FILENO);
 	if (pip->dupe2 == -1)
 		child_processes_handler(pip, "second dup2 in child 2", 2);
@@ -31,12 +31,12 @@ static void	second_child(t_pipex *pip)
 	if (!pip->cmd_and_args)
 		child_processes_handler(pip, "split failed", 2);
 	pip->path = get_path(pip, pip->cmd_and_args[0]);
-	if (!pip->path)
+	if (!pip->path || !*pip->path)
 		child_processes_handler(pip, "", 2);
 	close(pip->outfile);
 	execve(pip->path, pip->cmd_and_args, pip->envp);
 	free(pip->path);
-	perror("execve child 2");
+	perror(pip->cmd_and_args[0]);
 	free_the_split(pip->cmd_and_args);
 	exit(1);
 }
@@ -48,7 +48,7 @@ static void	first_child(t_pipex *pip)
 		malloc_fail_handler("command not found", NULL, 1);
 	pip->infile = open(pip->argv[1], O_RDONLY);
 	if (pip->infile == -1)
-		child_processes_handler(pip, "infile", 1);
+		child_processes_handler(pip, pip->argv[1], 1);
 	pip->dupe1 = dup2(pip->infile, STDIN_FILENO);
 	if (pip->dupe1 == -1)
 		child_processes_handler(pip, "first dup2 in child 1", 1);
@@ -65,7 +65,7 @@ static void	first_child(t_pipex *pip)
 	close(pip->infile);
 	execve(pip->path, pip->cmd_and_args, pip->envp);
 	free(pip->path);
-	perror("execve child 1");
+	perror(pip->cmd_and_args[0]);
 	free_the_split(pip->cmd_and_args);
 	exit(1);
 }

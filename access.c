@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 17:59:46 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/22 20:02:41 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/23 17:33:09 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,35 @@ static char	*check_access(char	*cmd, int *exit_status, int send_perror)
 {
 	int	access_valid;
 
+	//fprintf(stderr, "hi from check access\n");
 	access_valid = access(cmd, F_OK);
 	if (!access_valid)
 	{
+	//	fprintf(stderr, "hi from existence check\n");
 		access_valid = access(cmd, X_OK);
 		if (!access_valid)
+		{
+	//		fprintf(stderr, "hi from executable check\n");
 			return (cmd);
+		}
 		else
 		{
+	//		fprintf(stderr, "no executable\n");
+	//	fprintf(stderr, "exit status  = %d\n", *exit_status);
 			if (send_perror)
 				perror(cmd);
-			if (!exit_status)
+			if (!*exit_status)
+			{
 				*exit_status = 126;
+//				printf("exit status when not an executable: %d\n", *exit_status);
+			}	
 		}
 	}
 	else
 	{
 		if (send_perror)
 			perror(cmd);
-		if (!exit_status)
+		if (!*exit_status)
 			*exit_status = 127;
 	}
 	return (NULL);
@@ -97,8 +107,11 @@ static char	*find_exacutable(char *cmd, char *env, int	*exit_status)
 
 static char	*check_if_its_a_path(char *cmd, int	*exit_status)
 {
-	if (!cmd)
+	if (!cmd || !*cmd)
+	{
+		*exit_status = 127;
 		return (NULL);
+	}
 	if (ft_strchr(cmd, '/'))
 	{
 		if (check_access(cmd, exit_status, 1))
@@ -122,7 +135,7 @@ char	*get_path(t_pipex *pip, char *cmd)
 		if (ft_strncmp(pip->envp[i], "PATH=", 5) == 0)
 		{
 			path = find_exacutable(cmd, pip->envp[i] + 5, &pip->exit_status);
-			if (!path)
+			if (!path || !*path)
 			{
 				if (!pip->exit_status)
 					pip->exit_status = 127;
