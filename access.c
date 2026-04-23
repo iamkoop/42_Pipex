@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 17:59:46 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/23 17:33:09 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/23 18:28:53 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,18 @@ static char	*check_access(char	*cmd, int *exit_status, int send_perror)
 {
 	int	access_valid;
 
-	//fprintf(stderr, "hi from check access\n");
 	access_valid = access(cmd, F_OK);
 	if (!access_valid)
 	{
-	//	fprintf(stderr, "hi from existence check\n");
 		access_valid = access(cmd, X_OK);
 		if (!access_valid)
-		{
-	//		fprintf(stderr, "hi from executable check\n");
 			return (cmd);
-		}
 		else
 		{
-	//		fprintf(stderr, "no executable\n");
-	//	fprintf(stderr, "exit status  = %d\n", *exit_status);
 			if (send_perror)
 				perror(cmd);
 			if (!*exit_status)
-			{
 				*exit_status = 126;
-//				printf("exit status when not an executable: %d\n", *exit_status);
-			}	
 		}
 	}
 	else
@@ -125,12 +115,12 @@ char	*get_path(t_pipex *pip, char *cmd)
 	int		i;
 	char	*path;
 
-	if (!pip->envp || !*pip->envp)
-		return (perror("Envp not found"), NULL);
 	i = 0;
+	if (!cmd || !*cmd)
+		return (get_path_err_handler(pip, cmd, 0), NULL);
 	if (check_if_its_a_path(cmd, &pip->exit_status))
 		return (ft_strdup(cmd));
-	while (pip->envp[i])
+	while (pip->envp && pip->envp[i])
 	{
 		if (ft_strncmp(pip->envp[i], "PATH=", 5) == 0)
 		{
@@ -145,6 +135,6 @@ char	*get_path(t_pipex *pip, char *cmd)
 		}
 		i++;
 	}
-	errno = ENOENT;
-	return (perror(cmd), NULL);
+	get_path_err_handler(pip, cmd, 1);
+	return (NULL);
 }

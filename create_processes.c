@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 19:44:05 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/23 17:34:09 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/23 18:01:25 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	second_child(t_pipex *pip)
 		child_processes_handler(pip, "second dup2 in child 2", 2);
 	pip->cmd_and_args = ft_split(pip->argv[3], ' ');
 	if (!pip->cmd_and_args)
-		child_processes_handler(pip, "split failed", 2);
+		child_processes_handler(pip, "malloc", 2);
 	pip->path = get_path(pip, pip->cmd_and_args[0]);
 	if (!pip->path || !*pip->path)
 		child_processes_handler(pip, "", 2);
@@ -38,7 +38,7 @@ static void	second_child(t_pipex *pip)
 	free(pip->path);
 	perror(pip->cmd_and_args[0]);
 	free_the_split(pip->cmd_and_args);
-	exit(1);
+	exit(127);
 }
 
 static void	first_child(t_pipex *pip)
@@ -58,7 +58,7 @@ static void	first_child(t_pipex *pip)
 	close(pip->fds[1]);
 	pip->cmd_and_args = ft_split(pip->argv[2], ' ');
 	if (!pip->cmd_and_args)
-		child_processes_handler(pip, "split failed", 1);
+		child_processes_handler(pip, "malloc", 1);
 	pip->path = get_path(pip, pip->cmd_and_args[0]);
 	if (!pip->path)
 		child_processes_handler(pip, "", 1);
@@ -67,7 +67,7 @@ static void	first_child(t_pipex *pip)
 	free(pip->path);
 	perror(pip->cmd_and_args[0]);
 	free_the_split(pip->cmd_and_args);
-	exit(1);
+	exit(127);
 }
 
 int	parent(t_pipex *pip)

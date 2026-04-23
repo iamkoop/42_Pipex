@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 17:14:44 by nilsdruon         #+#    #+#             */
-/*   Updated: 2026/04/23 17:38:10 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/23 18:10:01 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int argc, char	**argv, char **envp)
 	if (argc != 5)
 	{
 		ft_putstr_fd("Usage: ./pipex infile cmd1 cmd2 outfile\n", 2);
-    	return (1);
+		return (1);
 	}
 	pip.argv = argv;
 	pip.envp = envp;
